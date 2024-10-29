@@ -2,6 +2,10 @@
 # featureMatrix : features (col), samples (row), should have col/row names
 # saveTo : should be a path to directory
 
+# remove later
+library(FactoMineR)
+library(factoextra)
+
 plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", saveName=""){
   # check input
   if(!is.data.frame(featureMatrix)){
