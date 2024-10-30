@@ -5,6 +5,11 @@
 # remove later
 library(FactoMineR)
 library(factoextra)
+library(ggplot2)
+
+# to do
+# make it so that you can add a title
+# figure out how to make it save the jpeg
 
 plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", saveName=""){
   # check input
@@ -30,6 +35,7 @@ plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", save
 
   # attach groups to samples - make sure samples names correspond in both inputs
   groupColName <- names(groups)[1]
+  print(groupColName)
   groups$samples <- row.names(groups)
   featureMatrix$samples <- row.names(featureMatrix)
   combinedFeaturesGroups <- merge(groups, featureMatrix,
@@ -39,22 +45,27 @@ plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", save
   combinedFeaturesGroups$samples <- NULL
   # print how many samples were removed
   numSamplesLost <- nrow(featureMatrix) - nrow(combinedFeaturesGroups)
-  cat(numSamplesLost, "samples were removed as they were not assigned
-      a group number. \n")
+  cat(numSamplesLost,
+      "samples were removed as they were not assigned a group number. \n")
 
   # run Multiple Component Analysis
-  results <- MCA(combinedFeaturesGroups[, !names(combinedFeaturesGroups) %in%
-                                          "groupColName"],
+  combinedFeaturesGroups <- data.frame(lapply(combinedFeaturesGroups,
+                                              as.factor))
+  featuresOnly <- combinedFeaturesGroups[, 2:ncol(combinedFeaturesGroups)]
+  results <- MCA(featuresOnly,
                  graph = FALSE)
 
   # generate plot + print + save
+  plotFile <- paste(saveTo, "/", saveName, ".jpg", sep = "")
+  print(plotFile)
+  jpeg(filename = plotFile, width = 800, height = 600)
   plot <- fviz_mca_ind(results,
                        label = "none",
-                       habillage = factor(combinedFeaturesGroups$groupColName),
+                       habillage = factor(combinedFeaturesGroups[[groupColName]]),
                        addEllipses = TRUE,
                        ellipse.type = "coincidence",
                        ggtheme = theme_minimal())
-
+  dev.off()
   cat("Saving MCA plot to", saveTo)
 
   # return MCA results
