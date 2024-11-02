@@ -63,7 +63,7 @@ plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", save
                        label = "none",
                        habillage = factor(combinedFeaturesGroups[[groupColName]]),
                        addEllipses = TRUE,
-                       ellipse.type = "coincidence",
+                       ellipse.type = "coincidence",f
                        ggtheme = theme_minimal())
   dev.off()
   cat("Saving MCA plot to", saveTo)
