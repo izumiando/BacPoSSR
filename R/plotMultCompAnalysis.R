@@ -11,7 +11,7 @@ library(ggplot2)
 # make it so that you can add a title
 # figure out how to make it save the jpeg
 
-plotMultCompAnalysisV1 <- function(featureMatrix, groups=NULL, saveTo="./", saveName=""){
+plotMultCompAnalysis <- function(featureMatrix, groups=NULL, saveTo="./", saveName=""){
   # check input
   if(!is.data.frame(featureMatrix)){
     stop("featureMatrix must be a data frame")
