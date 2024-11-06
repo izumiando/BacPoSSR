@@ -1,6 +1,24 @@
-# although this will work for kmer and unitig data, it is ideally for SNP matrices
-
-
+#' Filter Feature Matrix Using Genetic Relatedness
+#'
+#' This function computes the Genetic Relatedness Matrix (GRM) for a feature
+#' matrix using minimal allele frequencies and extracts the first 10 principal
+#' components of the GRM to regress against the features. The average of the
+#' p-values is computed to filter out features with a high p-value indicating
+#' correlation with population structure signal. This function can be used on
+#' any feature data but theoretically it is most fit for Single Nucleotide
+#' Polymorphism (SNP) data.
+#'
+#' @param featureMatrix : a presence absence matrix where features are columns,
+#' and samples are rows. The format should be a data frame and col/row names
+#' should be preassigned.
+#' @param grm : (default=NULL) if a GRM has been computed before for the
+#' featureMatrix, it can be added here to by pass the computation.
+#' @param thresholdP : (default=0.05) cut off p-value
+#'
+#' @return the GRM and a subsetted featureMatrix
+#' @export
+#'
+#' @examples filterGenRelatedness(featureMatrix = tinyFeatureMatrix)
 filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
   numSamples <- nrow(featureMatrix)
   # compute Genetic Relatedness Matrix (grm) if featureMatrix is not a GRM

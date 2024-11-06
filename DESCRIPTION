@@ -1,7 +1,6 @@
 Package: BacPoSSR
 Type: Package
-Title: Filtering Tool to Reduce Population Structure Signal for 
-Bacterial Genotype-Phenotype Analysis Data
+Title: Filtering Tool to Reduce Population Structure Signal for Bacterial Genotype-Phenotype Analysis Data
 Version: 1.0.0
 Author: Izumi Ando
 Maintainer: Izumi Ando <izumi.ando@mail.utoronto.ca>
