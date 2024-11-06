@@ -1,17 +1,33 @@
-# PRECONDITIONS:
-# featureMatrix : features (col), samples (row), should have col/row names
-# saveTo : should be a path to directory
-
-# remove later
-library(FactoMineR)
-library(factoextra)
-library(ggplot2)
-
-# to do
-# make it so that you can add a title
-# figure out how to make it save the jpeg
-
-plotMultCompAnalysis <- function(featureMatrix, groups=NULL, saveTo="./", saveName=""){
+#' Plot Multiple Component Analysis (MCA)
+#'
+#' This function conducts Multiple Component Analysis (MCA) and plots the
+#' resulting graph. This can be used to visually evaluate the efficacy of the
+#' filtering methods provided in the BacPoSSR package or to visualize the
+#' population structure signal of any given feature matrix. The examples can be
+#' run if TinySampleData.RData is loaded.
+#'
+#' @param featureMatrix : a presence absence matrix where features are columns,
+#' and samples are rows. The format should be a data frame and col/row names
+#' should be preassigned.
+#' @param groups : (default=NULL) a single column data frame of the groups
+#' assigned to each sample. Row names of this data frame should correspond to
+#' that of the featureMatrix.
+#' @param saveTo : (default="./") path to directory where you want the MCA plot
+#' to be saved.
+#' @param title : (default="MCA") title of the plot.
+#'
+#' @return the MCA results
+#' @export
+#'
+#' @examples plotMultCompAnalysis(featureMatrix = tinyFeatureMatrix,
+#' groups = tinyGroupsMatching)
+#'
+#' @import FactoMineR
+#' @import factoextra
+#' @import ggplot2
+#'
+plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
+                                 saveTo="./", title="MCA"){
   # check input
   if(!is.data.frame(featureMatrix)){
     stop("featureMatrix must be a data frame")
@@ -52,21 +68,21 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL, saveTo="./", saveNa
   combinedFeaturesGroups <- data.frame(lapply(combinedFeaturesGroups,
                                               as.factor))
   featuresOnly <- combinedFeaturesGroups[, 2:ncol(combinedFeaturesGroups)]
-  results <- MCA(featuresOnly,
+  results <- FactoMineR::MCA(featuresOnly,
                  graph = FALSE)
 
   # generate plot + print + save
-  plotFile <- paste(saveTo, "/", saveName, ".jpg", sep = "")
-  print(plotFile)
-  jpeg(filename = plotFile, width = 800, height = 600)
-  plot <- fviz_mca_ind(results,
+  plot <- factoextra::fviz_mca_ind(results,
                        label = "none",
-                       habillage = factor(combinedFeaturesGroups[[groupColName]]),
+                       habillage =
+                         factor(combinedFeaturesGroups[[groupColName]]),
                        addEllipses = TRUE,
-                       ellipse.type = "coincidence",f
-                       ggtheme = theme_minimal())
-  dev.off()
-  cat("Saving MCA plot to", saveTo)
+                       ellipse.type = "coincidence",
+                       ggtheme = theme_minimal()) + ggtitle(title)
+  print(plot)
+  plotFile <- file.path(saveTo, paste0(title, ".jpg"))
+  ggsave(filename = plotFile, plot = plot, width = 8, height = 6, dpi = 300)
+  cat("Saving MCA plot to", plotFile)
 
   # return MCA results
   return(results)

@@ -1,14 +1,23 @@
 Package: BacPoSSR
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Filtering Tool to Reduce Population Structure Signal for 
+Bacterial Genotype-Phenotype Analysis Data
+Version: 1.0.0
 Author: Izumi Ando
-Maintainer: izumi Ando <izumi.ando@mail.utoronto.ca>
+Maintainer: Izumi Ando <izumi.ando@mail.utoronto.ca>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 4.4.1)
+Imports:
+    ggplot2,
+    FactoMineR,
+    factoextra,
+    vegan
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+URL: https://github.com/izumiando/BacPoSSR
