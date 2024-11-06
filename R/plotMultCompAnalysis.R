@@ -22,6 +22,15 @@
 #' @examples plotMultCompAnalysis(featureMatrix = tinyFeatureMatrix,
 #' groups = tinyGroupsMatching)
 #'
+#' @references
+#' Lê S, Josse J, Husson F (2008). “FactoMineR: A Package for Multivariate
+#' Analysis.” Journal of Statistical Software, 25(1), 1–18.
+#' doi:10.18637/jss.v025.i01.
+#'
+#' Wickham H (2016). ggplot2: Elegant Graphics for Data Analysis.
+#' Springer-Verlag New York. ISBN 978-3-319-24277-4,
+#' https://ggplot2.tidyverse.org.
+#'
 #' @import FactoMineR
 #' @import factoextra
 #' @import ggplot2

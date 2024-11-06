@@ -24,6 +24,15 @@
 #' @examples filterProcAnalysis(featureMatrix = tinyFeatureMatrix,
 #' phenotypes = phenotypes)
 #'
+#' @references
+#' Oksanen J, Simpson G, Blanchet F, Kindt R, Legendre P, Minchin P, O'Hara R,
+#' Solymos P, Stevens M, Szoecs E, Wagner H, Barbour M, Bedward M, Bolker B,
+#' Borcard D, Carvalho G, Chirico M, De Caceres M, Durand S, Evangelista H,
+#' FitzJohn R, Friendly M, Furneaux B, Hannigan G, Hill M, Lahti L, McGlinn D,
+#' Ouellette M, Ribeiro Cunha E, Smith T, Stier A, Ter Braak C,
+#' Weedon J (2024). _vegan: Community Ecology Package_. Rpackage version 2.6-8,
+#' <https://CRAN.R-project.org/package=vegan>.
+#'
 filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
   # run Procrustes analysis featureMatrix vs phenotypes
   procResults <- vegan::procrustes(featureMatrix, phenotypes)

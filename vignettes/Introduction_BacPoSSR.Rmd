@@ -1,0 +1,53 @@
+---
+title: "Introduction_BacPoSSR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction_BacPoSSR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(BacPoSSR)
+```
+
+## Load Sample Data
+```{r}
+load("~/BacPoSSR/TinySampleData.RData")
+```
+
+## Step 1: Check Population Structure Signal in Original Data
+
+```{r}
+originalMCA <- plotMultCompAnalysis(featureMatrix = tinyFeatureMatrix, 
+                                    groups = tinyGroupsMatching)
+
+```
+
+## Step 2: Filter Data Using Provided Functions
+
+```{r}
+procAnalysisRes <- filterProcAnalysis(featureMatrix = tinyFeatureMatrix, 
+                                      phenotypes = phenotypes)
+genRelatednessRes <- filterGenRelatedness(featureMatrix = tinyFeatureMatrix)
+genRelatednessResFeatures <- genRelatednessRes[[2]]
+```
+
+## Step 3: Plot MCA to Check Efficacy of Population Structure Removal
+
+```{r}
+procAnalysisMCA <- plotMultCompAnalysis(featureMatrix = procAnalysisRes,
+                                        groups = tinyGroupsMatching,
+                                        title = "Procrustes Analysis Filtering")
+genRelatednessMCA <- plotMultCompAnalysis(featureMatrix = 
+                                            genRelatednessResFeatures,
+                                        groups = tinyGroupsMatching,
+                                        title = "Genetic Relatedness Filtering")
+```
