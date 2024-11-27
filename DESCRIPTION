@@ -14,7 +14,8 @@ Imports:
     ggplot2,
     FactoMineR,
     factoextra,
-    vegan
+    vegan,
+    shiny
 Suggests: 
     knitr,
     rmarkdown,
