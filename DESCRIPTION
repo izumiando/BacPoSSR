@@ -2,7 +2,9 @@ Package: BacPoSSR
 Type: Package
 Title: Filtering Tool to Reduce Population Structure Signal for Bacterial Genotype-Phenotype Analysis Data
 Version: 1.0.0
-Author: Izumi Ando
+Authors@R: person("Izumi", "Ando", 
+                  email = "izumi.ando@mail.utoronto.ca", 
+                  role = c("aut", "cre"))
 Maintainer: Izumi Ando <izumi.ando@mail.utoronto.ca>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
@@ -15,7 +17,8 @@ Imports:
     FactoMineR,
     factoextra,
     vegan,
-    shiny
+    shiny,
+    bslib
 Suggests: 
     knitr,
     rmarkdown,
