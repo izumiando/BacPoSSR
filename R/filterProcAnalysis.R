@@ -59,3 +59,5 @@ filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
 
   return(filteredFeatureMatrix)
 }
+
+# [END]

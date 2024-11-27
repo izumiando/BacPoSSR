@@ -83,3 +83,5 @@ filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
   output <- list(filteredFeatureMatrix, grm)
   return(output)
 }
+
+# [END]

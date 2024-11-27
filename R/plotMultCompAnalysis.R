@@ -96,3 +96,5 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
   # return MCA results
   return(results)
 }
+
+# [END]

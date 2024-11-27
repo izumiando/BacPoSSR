@@ -16,3 +16,5 @@
 ### 3) creates assigned jpg image in the default directory
 ### 4) creates assigned jpg image in the assigned directory
 ### 5) returns a list (i think)
+
+# [END]
