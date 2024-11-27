@@ -21,7 +21,7 @@ assigned to each sample. Row names of this data frame should correspond to
 that of the featureMatrix.}
 
 \item{saveTo}{: (default="./") path to directory where you want the MCA plot
-to be saved.}
+to be saved. If set to null, plot will not be saved.}
 
 \item{title}{: (default="MCA") title of the plot.}
 }

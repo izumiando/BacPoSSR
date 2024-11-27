@@ -13,7 +13,7 @@
 #' assigned to each sample. Row names of this data frame should correspond to
 #' that of the featureMatrix.
 #' @param saveTo : (default="./") path to directory where you want the MCA plot
-#' to be saved.
+#' to be saved. If set to null, plot will not be saved.
 #' @param title : (default="MCA") title of the plot.
 #'
 #' @return the MCA results
@@ -37,7 +37,7 @@
 #'
 plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
                                  saveTo="./", title="MCA"){
-  # check input
+  # check input to prevent errors
   if(!is.data.frame(featureMatrix)){
     stop("featureMatrix must be a data frame")
   }else if(is.null(groups)){
@@ -52,10 +52,12 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
     stop("groups should have 1 column only")
   }
   # creates directory is saveTo (path) does not exist
-  if(!dir.exists(saveTo)){
-    cat("Directory", saveTo, "does not currently exist. \n")
-    cat("Creating new directory:", saveTo)
-    dir.create(saveTo)
+  if(!is.null(saveTo)){
+    if(!dir.exists(saveTo)){
+      cat("Directory", saveTo, "does not currently exist. \n")
+      cat("Creating new directory:", saveTo)
+      dir.create(saveTo)
+    }
   }
 
   # attach groups to samples - make sure samples names correspond in both inputs
@@ -90,9 +92,14 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
                        ggtheme = theme_minimal()) + ggtitle(title)
   print(plot)
   plotFile <- file.path(saveTo, paste0(title, ".jpg"))
-  ggplot2::ggsave(filename = plotFile, plot = plot, width = 8, height = 6, dpi = 300)
-  cat("Saving MCA plot to", plotFile)
-
+  if(!is.null(saveTo)){
+    ggplot2::ggsave(filename = plotFile,
+                    plot = plot,
+                    width = 8,
+                    height = 6,
+                    dpi = 300)
+    cat("Saving MCA plot to", plotFile)
+  }
   # return MCA results
   return(results)
 }

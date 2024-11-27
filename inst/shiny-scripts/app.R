@@ -14,6 +14,7 @@ library(bslib)
 # check coding conventions
 # add a message in the cards before plots are rendered
 # improve text visuals in each tab, change font size, bold etc
+# input checks can be a little more extensive
 
 
 
@@ -148,7 +149,7 @@ server <- function(input, output){
     output$originalProcAnalysisMCA <- renderPlot({
       BacPoSSR::plotMultCompAnalysis(featureMatrix = featureMatrixPA,
                                      groups = groupsPA,
-                                     saveTo = "./", # update this
+                                     saveTo = NULL,
                                      title = input$datasetPA)
     })
 
@@ -156,7 +157,7 @@ server <- function(input, output){
     output$filteredProcAnalysisMCA <- renderPlot({
       BacPoSSR::plotMultCompAnalysis(featureMatrix = filteredMatrixPA(),
                                      groups = groupsPA,
-                                     saveTo = "./", # update this
+                                     saveTo = NULL,
                                      title = input$datasetPA)
     })
 
@@ -204,7 +205,7 @@ server <- function(input, output){
     output$originalGenRelatMCA <- renderPlot({
       BacPoSSR::plotMultCompAnalysis(featureMatrix = featureMatrixGR,
                                      groups = groupsGR,
-                                     saveTo = "./", # update this
+                                     saveTo = NULL,
                                      title = input$datasetGR)
     })
 
@@ -213,7 +214,7 @@ server <- function(input, output){
     output$filteredGenRelatMCA <- renderPlot({
       BacPoSSR::plotMultCompAnalysis(featureMatrix = filteredMatrixGR()[[1]],
                                      groups = groupsGR,
-                                     saveTo = "./", # update this
+                                     saveTo = NULL,
                                      title = input$datasetGR)
     })
 

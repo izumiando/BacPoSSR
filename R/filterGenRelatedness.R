@@ -20,6 +20,19 @@
 #'
 #' @examples filterGenRelatedness(featureMatrix = tinyFeatureMatrix)
 filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
+  # input checks for error prevention
+  if(!is.data.frame(featureMatrix)){
+    stop("featureMatrix must be a data frame")
+  }else if(!is.null(grm)){
+    if(!is.data.frame(grm)){
+      stop("grm must be a data frame or NULL")
+    }
+  }else if(!is.double(thresholdP)){
+    stop("threshold must be a number between 0 and 1")
+  }else if(threshold < 0 || threshold > 1){
+    stop("threshold must be a number between 0 and 1")
+  }
+
   numSamples <- nrow(featureMatrix)
   # compute Genetic Relatedness Matrix (grm) if featureMatrix is not a GRM
   if (is.null(grm)){
