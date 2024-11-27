@@ -1,0 +1,38 @@
+---
+title: "rshinyHome"
+author: "Izumi Ando"
+output: html_fragment
+---
+
+## Welcome to BacPoSSR!
+
+For those that are not accustomed to using R packages in code format, this app should give you an interactive idea of what BacPoSSR can do.
+
+### How It Works
+1. **Select the filtering method**
+   - BacPoSSR provides two different methods to filter features from a feature matrix. Select the tab with the method you would like to use.
+   - **Procrustes Analysis** : In this option, your feature matrix will be filtered based on the Procrustes distance assigned to each feature, computed by Procrustes Analysis on the feature matrix against its phenotype data. This uses the `filterProcAnalysis` function in the BacPoSSR package.
+   - **Genetic Relatedness** : In this option, your feature matrix will be filtered based on the genetic relatedness matrix computed from the input. This option is recommended for users using Single Nucleotide Polymorphisms (SNPs) as their features. This uses the `filterGenRelatedness` function in the BacPoSSR package.
+
+2. **Upload your files and set the parameters**
+   - Please review the Input Specifications below for details on the input data requirements and meanings.
+
+3. **Examine the efficacy of the filtering**
+   - After satisfying the Input Specifications, click on the "Run" button.
+   - Two plots should appear on the right side of your screen. The first plot, is the Multiple Component Analysis (MCA) of your unfiltered, input dataset. The second plot is the MCA of your filtered dataset. Assuming the groups assigned to each sample are population groups, if the second plot has less color segregation than the first, the filtering can be said to be effective.
+   - If you find that the filtering was not effective enough, try changing the threshold parameter or consider using a different filtering method.
+
+4. **Download the filtered data**
+   - If you are satisfied with the filtering, you can download the filtered feature matrix from the button under the second MCA.
+
+### Input Specifications
+- _feature matrix_ : A feature (k-mer, SNP, unitig etc) presence absence matrix where the rows are samples and columns are features. The first row and column should have sample / feature identifiers. Must be in csv file format. (For Genetic Relatedness, the user may opt to input a genetic relatedness matrix instead as long as it is specified in the "type of data" box.)
+- _phenotype table_ : A two-column table of the binary phenotypes of each sample. The first column should be the sample identifiers and the second column should be the phenotype assignments. The first row should be a header. Must be in csv file format.
+- _group table_ : A two-column table of the population group assignments of each sample. The first column should be the sample identifiers and the second column should be the group assignments. The first row should be a header. Must be in csv file format.
+- _threshold_ (Procrustes Analysis) : The proportion of features that should be removed by filtering. Must be a number between 0 and 1.
+- _threshold_ (Genetic Relatedness) : The cut-off p-value for filtering. Must be a number between 0 and 1.
+- _dataset name_ : The name of the dataset you are inputting. This will be included in the MCA plot titles.
+
+### Contact Support
+For more information regarding BacPoSSR, please refer to the GitHub : https://github.com/izumiando/BacPoSSR
+For inquiries regarding BacPoSSR or this Shiny app, please reach out to the author, Izumi, at izumi.ando@mail.utoronto.ca

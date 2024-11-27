@@ -33,6 +33,8 @@
 #' Weedon J (2024). _vegan: Community Ecology Package_. Rpackage version 2.6-8,
 #' <https://CRAN.R-project.org/package=vegan>.
 #'
+#' @import vegan
+#'
 filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
   # run Procrustes analysis featureMatrix vs phenotypes
   procResults <- vegan::procrustes(featureMatrix, phenotypes)
