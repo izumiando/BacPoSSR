@@ -90,7 +90,7 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
                        ggtheme = theme_minimal()) + ggtitle(title)
   print(plot)
   plotFile <- file.path(saveTo, paste0(title, ".jpg"))
-  ggsave(filename = plotFile, plot = plot, width = 8, height = 6, dpi = 300)
+  ggplot2::ggsave(filename = plotFile, plot = plot, width = 8, height = 6, dpi = 300)
   cat("Saving MCA plot to", plotFile)
 
   # return MCA results

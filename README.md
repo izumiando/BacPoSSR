@@ -3,7 +3,8 @@
 
 # BacPoSSR
 
-An Example R Package For BCB410H: Applied Bioinformatics.
+Filtering Tool to Reduce Population Structure Signal for Bacterial
+Genotype-Phenotype Analysis Data
 
 ## Description
 
@@ -44,13 +45,22 @@ runBacPoSSR()
 ## Overview
 
 ``` r
-ls("package:BacPoSSR")
-data(package = "BacPoSSR") 
-browseVignettes("BacPoSSR")
+ls("package:BacPoSSR") # lists the functions in BacPoSSR
+data(package = "BacPoSSR") # view sample dataset
+browseVignettes("BacPoSSR") # view all vignettes
 ```
 
-`BacPoSSR` contains 3 functions. BacPoSSR can be contextualized in the
-GWAS / ML predictive studies pipeline as illustrated in the image below.
+`BacPoSSR` contains 3 functions. For further details on how to use each
+function, please refer to the vignette and help documentation. <br>
+<br> - *plotMultCompAnalysis* : use this function to conduct Multiple
+Component Analysis and plots its results to examine the population
+structure signal of your dataset. <br> - *filterProcAnalysis* : use this
+function to filter your feature matrix using Procrustes Analysis. <br> -
+*filterGenRelatedness* : use this function to filter your feature matrix
+based on the features’ genetic relatedness. Using SNPs data is
+recommended for this function. <br> <br> BacPoSSR can be contextualized
+in the GWAS / ML predictive studies pipeline as illustrated in the image
+below.
 
 ![](./inst/extdata/BacPoSSR_pipeline.png)
 
@@ -61,10 +71,11 @@ all of which were written by the author while making use of functions
 from third-party R packages. The *plotMultCompAnalysis* function formats
 the input data (feature matrix and group assignments) and utilizes the
 *MCA* function from the `FactoMineR` package to conduct Multiple
-Component Analysis and the *fviz_mca_ind* function from the `factoextra`
-package to plot the results. The *filterProcAnalysis* function filters
-the input feature matrix based on the Procrustes distances of each
-feature, computed by conducting the analysis on the features against the
+Component Analysis, the *fviz_mca_ind* function from the `factoextra`
+package to plot the results, and *ggsave* from the `ggplot2` package to
+save the image. The *filterProcAnalysis* function filters the input
+feature matrix based on the Procrustes distances of each feature,
+computed by conducting the analysis on the features against the
 phenotype data. The function utilizes the *procrustes* function from the
 `vegan` package to conduct the Procrustes Analysis. The code to
 computate of the distances and to do the actual filtering was written by
