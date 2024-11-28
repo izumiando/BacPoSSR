@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 # BacPoSSR
-Filtering Tool to Reduce Population Structure Signal for Bacterial Genotype-Phenotype Analysis Data
+Filtering Tool to Reduce Population Structure Signal in Bacterial Genotype-Phenotype Analysis Data
 
 ## Description
 
