@@ -8,7 +8,7 @@ citEntry(entry = "Unpublished",
   year         = "2024",
 
   textVersion  =
-  paste("Silva, A. (2022) BacPoSSR: Filtering tool to reduce population
+  paste("Ando, I. (2024) BacPoSSR: Filtering tool to reduce population
   structure signal for bacterial genotype-phenotype association studies.
         Unpublished. URL https://github.com/izumiando/BacPoSSR.")
 )

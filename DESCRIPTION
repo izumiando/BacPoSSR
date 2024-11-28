@@ -6,8 +6,8 @@ Authors@R: person("Izumi", "Ando",
                   email = "izumi.ando@mail.utoronto.ca", 
                   role = c("aut", "cre"))
 Maintainer: Izumi Ando <izumi.ando@mail.utoronto.ca>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: 
+    BacPoSSR (Bacterial Population Structure Signal Reducer) is a tool to help users filter their single nucleotide polymorphism (SNP) or k-mer data to reduce population structure signal in the dataset before it is used in bacterial genotype-phenotype association or predictive studies. It aims to improve the flow of these studies, especially methods that use machine learning models to compute these mappings because scientists must build in their own methods to account for population structure within their models, unlike more established genome-wide association studies (GWAS) tools such as pyseer (Lees et al., 2018). When population structure is not accounted for, association/predictive studies can easily lead to false positives by inferring phenotypes from population structure (Karlsen et al., 2023).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -24,6 +24,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/Needs/website: https://cran.r-project.org
 RoxygenNote: 7.3.2
 URL: https://github.com/izumiando/BacPoSSR
 VignetteBuilder: knitr

@@ -29,7 +29,7 @@ filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
     }
   }else if(!is.double(thresholdP)){
     stop("threshold must be a number between 0 and 1")
-  }else if(threshold < 0 || threshold > 1){
+  }else if(thresholdP < 0 || thresholdP > 1){
     stop("threshold must be a number between 0 and 1")
   }
 
