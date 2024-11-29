@@ -25,7 +25,6 @@ library(BacPoSSR)
 
 To install and attach `BacPoSSR` to your current work session, run the following lines in your R console.
 ```{r, eval = FALSE}
-
 # install.packages("devtools")
 library("devtools")
 devtools::install_github("izumiando/BacPoSSR", build_vignettes = TRUE)
@@ -60,20 +59,32 @@ We will first start by loading the data into our R environment and formatting it
 
 ```{r, eval = FALSE}
 # getting the file paths for the sample data
-pathFeatureMatrix <- system.file("extdata", "sampleFeatureMatrix.csv", package = "BacPoSSR")
-pathPhenotypeData <- system.file("extdata", "samplePhenotypeData.csv", package = "BacPoSSR")
-pathGroupAssignments <- system.file("extdata", "sampleGroupAssignments.csv", package = "BacPoSSR")
+pathFeatureMatrix <- system.file("extdata", 
+                                 "sampleFeatureMatrix.csv", 
+                                 package = "BacPoSSR")
+pathPhenotypeData <- system.file("extdata", 
+                                 "samplePhenotypeData.csv", 
+                                 package = "BacPoSSR")
+pathGroupAssignments <- system.file("extdata", 
+                                    "sampleGroupAssignments.csv", 
+                                    package = "BacPoSSR")
 
 # load the data from the file paths
 sampleFeatureMatrix <- read.csv(pathFeatureMatrix, header = TRUE)
 samplePhenotypeData <- read.csv(pathPhenotypeData, header = TRUE)
 sampleGroupAssignments <- read.csv(pathGroupAssignments, header = TRUE)
 
-# format the data objects so that the column with sample names are assigned as row names
-row.names(sampleFeatureMatrix) <- sampleFeatureMatrix[, 1] # assigning first column as row names
-sampleFeatureMatrix <- sampleFeatureMatrix[, -1] # removing redundant first column
+# format the data objects so that 
+# the column with sample names are assigned as row names
+
+# assigning first column as row names
+row.names(sampleFeatureMatrix) <- sampleFeatureMatrix[, 1] 
+# removing redundant first column
+sampleFeatureMatrix <- sampleFeatureMatrix[, -1]
+
 row.names(samplePhenotypeData) <- samplePhenotypeData[, 1]
 samplePhenotypeData <- samplePhenotypeData[, -1]
+
 row.names(sampleGroupAssignments) <- sampleGroupAssignments[, 1]
 sampleGroupAssignments <- sampleGroupAssignments[, -1]
 
@@ -110,13 +121,15 @@ sampleFilteredMatrixGR <- sampleFilteredMatrixGR[[1]]
 ### Step 3 : MCA on Filtered Dataset
 We will examine the efficacy of the filtering done in Step 2 by plotting the MCA of the filtered feature matrices. If the filtering is effective, the color segregated clusters seen in Step 1 should be reduced and we should see the colored points over lapping with others. If the clustering persists, try either re-filtering with a tighter threshold or try another filtering method. (Note: again, since the sample data used in this tutorial is dummy data, the described phenomena may not be observed.)
 ```{r, eval = FALSE}
-# plotting the
+# plotting the sample dataset post filtering with filterProcAnalysis 
+# with a threshold of 0.1
 sampleFilteredProcAnalysisMCA <-
   BacPoSSR::plotMultCompAnalysis(featureMatrix = sampleFilteredMatrixPA,
                                  groups = sampleGroupAssignments,
                                  saveTo = NULL,
                                  title = "Sample Filtered Dataaset, PA, 0.1")
-
+# plotting the sample dataset post filtering with filterGenRelatedness 
+# with a p-value threshold of 0.05
 sampleFilteredGenRelMCA <-
   BacPoSSR::plotMultCompAnalysis(featureMatrix = sampleFilteredMatrixGR,
                                  groups = sampleGroupAssignments,
