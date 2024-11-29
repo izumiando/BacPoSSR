@@ -3,7 +3,7 @@
 
 # BacPoSSR
 
-Filtering Tool to Reduce Population Structure Signal for Bacterial
+Filtering Tool to Reduce Population Structure Signal in Bacterial
 Genotype-Phenotype Analysis Data
 
 ## Description
@@ -46,7 +46,6 @@ runBacPoSSR()
 
 ``` r
 ls("package:BacPoSSR") # lists the functions in BacPoSSR
-data(package = "BacPoSSR") # view sample dataset
 browseVignettes("BacPoSSR") # view all vignettes
 ```
 

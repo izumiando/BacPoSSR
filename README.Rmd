@@ -44,7 +44,6 @@ runBacPoSSR()
 
 ``` r
 ls("package:BacPoSSR") # lists the functions in BacPoSSR
-data(package = "BacPoSSR") # view sample dataset
 browseVignettes("BacPoSSR") # view all vignettes
 ```
 `BacPoSSR` contains 3 functions. For further details on how to use each function, please refer to the vignette and help documentation.
