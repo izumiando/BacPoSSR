@@ -14,9 +14,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 options(repos = c(CRAN = "https://cran.r-project.org"))
-```
 
-```{r setup}
+# Attach the package
 library(BacPoSSR)
 ```
 
@@ -25,26 +24,30 @@ library(BacPoSSR)
 `BacPoSSR` is a tool to filter feature data to reduce population structure signal before conducting  bacterial GWAS / machine learning predictive studies.
 
 To install and attach `BacPoSSR` to your current work session, run the following lines in your R console.
-```{r}
-install.packages("devtools")
+```{r, eval = FALSE}
+
+# install.packages("devtools")
 library("devtools")
 devtools::install_github("izumiando/BacPoSSR", build_vignettes = TRUE)
 library("BacPoSSR")
 ```
 
 To view the functions available in this package, run the following line in your R console.
-```{r}
+```{r, eval = FALSE}
 ls("package:BacPoSSR")
 ```
-
-To view the sample datasets available in this package, run the following line in your R console.
+`
+Sample datasets are provided in the `inst/extdata` subdirectory. 
+You can load them and use them in your R environment using the following lines of code. An example of how this can be used is included in the Functionality section of this tutorial.
 As of the most recent update to this package on Nov 27th, 2024, the sample datasets available are dummy data.
 ```{r}
-data(package = "BacPoSSR")
+# replace "file.csv" with the file you want to load
+# filePath <- system.file("extdata", "file.csv", package = "BacPoSSR")
+# loadedData <- read.csv(filePath, header = TRUE)
 ```
 
 To to run the Shiny app for this package, run the following line in your R console.
-```{r}
+```{r, eval = FALSE}
 runBacPoSSR()
 ```
 
@@ -55,7 +58,7 @@ In this section, we will go through how to use the functions with the sample dat
 ### Step 0 : Load Data
 We will first start by loading the data into our R environment and formatting it to comply with the input requirements of the functions.
 
-```{r}
+```{r, eval = FALSE}
 # getting the file paths for the sample data
 pathFeatureMatrix <- system.file("extdata", "sampleFeatureMatrix.csv", package = "BacPoSSR")
 pathPhenotypeData <- system.file("extdata", "samplePhenotypeData.csv", package = "BacPoSSR")
@@ -67,7 +70,7 @@ samplePhenotypeData <- read.csv(pathPhenotypeData, header = TRUE)
 sampleGroupAssignments <- read.csv(pathGroupAssignments, header = TRUE)
 
 # format the data objects so that the column with sample names are assigned as row names
-row.names(sampleFeatureMatrix) <- sampleFeatureMatrix[, 1] # assigning first column as row names 
+row.names(sampleFeatureMatrix) <- sampleFeatureMatrix[, 1] # assigning first column as row names
 sampleFeatureMatrix <- sampleFeatureMatrix[, -1] # removing redundant first column
 row.names(samplePhenotypeData) <- samplePhenotypeData[, 1]
 samplePhenotypeData <- samplePhenotypeData[, -1]
@@ -79,8 +82,8 @@ sampleGroupAssignments <- sampleGroupAssignments[, -1]
 ### Step 1 : Multiple Component Analysis (MCA) on Unfiltered Dataset
 Now that the data is ready to use in our R environment, we will first examine the population structure of the unfiltered dataset by plotting the MCA. (Note: The sample dataset is a dummy data so the plot will not be representative of what real data would look like. In a dataset with strong population signal, we would expect to see clusters of points with the same color.)
 
-```{r}
-sampleUnfilteredMCA <- 
+```{r, eval = FALSE}
+sampleUnfilteredMCA <-
   BacPoSSR::plotMultCompAnalysis(featureMatrix = sampleFeatureMatrix,
                                  groups = sampleGroupAssignments,
                                  saveTo = NULL,
@@ -90,13 +93,13 @@ sampleUnfilteredMCA <-
 ### Step 2 : Filter Data
 Next, we will filter our dataset using the two methods provided in this package. For this first run, we will use the default threshold parameters.
 
-```{r}
-sampleFilteredMatrixPA <- 
+```{r, eval = FALSE}
+sampleFilteredMatrixPA <-
   BacPoSSR::filterProcAnalysis(featureMatrix = sampleFeatureMatrix,
                                phenotypes = samplePhenotypeData,
                                threshold = 0.1)
 
-sampleFilteredMatrixGR <- 
+sampleFilteredMatrixGR <-
   BacPoSSR::filterGenRelatedness(featureMatrix = sampleFeatureMatrix,
                                  grm = NULL,
                                  thresholdP = 0.05)
@@ -106,15 +109,15 @@ sampleFilteredMatrixGR <- sampleFilteredMatrixGR[[1]]
 
 ### Step 3 : MCA on Filtered Dataset
 We will examine the efficacy of the filtering done in Step 2 by plotting the MCA of the filtered feature matrices. If the filtering is effective, the color segregated clusters seen in Step 1 should be reduced and we should see the colored points over lapping with others. If the clustering persists, try either re-filtering with a tighter threshold or try another filtering method. (Note: again, since the sample data used in this tutorial is dummy data, the described phenomena may not be observed.)
-```{r}
-# plotting the 
-sampleFilteredProcAnalysisMCA <- 
+```{r, eval = FALSE}
+# plotting the
+sampleFilteredProcAnalysisMCA <-
   BacPoSSR::plotMultCompAnalysis(featureMatrix = sampleFilteredMatrixPA,
                                  groups = sampleGroupAssignments,
                                  saveTo = NULL,
                                  title = "Sample Filtered Dataaset, PA, 0.1")
 
-sampleFilteredGenRelMCA <- 
+sampleFilteredGenRelMCA <-
   BacPoSSR::plotMultCompAnalysis(featureMatrix = sampleFilteredMatrixGR,
                                  groups = sampleGroupAssignments,
                                  saveTo = NULL,
@@ -148,5 +151,5 @@ Please use the following citation to reference this package.
 
 
 ```{r}
-sessionInfo()
+# sessionInfo()
 ```
