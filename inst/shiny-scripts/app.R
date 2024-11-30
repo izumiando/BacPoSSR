@@ -129,12 +129,16 @@ server <- function(input, output){
     featureMatrixPA <- as.data.frame(featureMatrixPA[, -1])
 
     phenotypes <- read.csv(input$phenotypes$datapath, header = TRUE)
-    row.names(phenotypes) <- phenotypes[, 1]
+    sampleNamesPh <- phenotypes[, 1]
     phenotypes <- as.data.frame(phenotypes[, -1])
+    row.names(phenotypes) <- sampleNamesPh
+    colnames(phenotypes) <- c("phenotypes")
 
     groupsPA <- read.csv(input$groupsPA$datapath, header = TRUE)
-    row.names(groupsPA) <- groupsPA[, 1]
+    sampleNamesG <- groupsPA[, 1]
     groupsPA <- as.data.frame(groupsPA[, -1])
+    row.names(groupsPA) <- sampleNamesG
+    colnames(groupsPA) <- c("groups")
 
     # run filterProcAnalysis
 
@@ -183,8 +187,10 @@ server <- function(input, output){
     featureMatrixGR <- as.data.frame(featureMatrixGR[, -1])
 
     groupsGR <- read.csv(input$groupsGR$datapath, header = TRUE)
-    row.names(groupsGR) <- groupsGR[, 1]
+    sampleNames <- groupsGR[, 1]
     groupsGR <- as.data.frame(groupsGR[, -1])
+    row.names(groupsGR) <- sampleNames
+    colnames(groupsGR) <- c("groups")
 
     # run filterGenRelatedness
     if(input$grmStatus=="grm"){
