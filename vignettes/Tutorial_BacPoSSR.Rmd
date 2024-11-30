@@ -82,15 +82,14 @@ row.names(sampleFeatureMatrix) <- sampleFeatureMatrix[, 1]
 # removing redundant first column
 sampleFeatureMatrix <- sampleFeatureMatrix[, -1]
 
-row.names(samplePhenotypeData) <- samplePhenotypeData[, 1]
-samplePhenotypeData <- samplePhenotypeData[, -1]
-# making sure object stays a data frame
-samplePhenotypeData <- as.data.frame(samplePhenotypeData)
+sampleNames <- samplePhenotypeData[, 1]
+samplePhenotypeData <- as.data.frame(samplePhenotypeData[, -1])
+row.names(samplePhenotypeData) <- sampleNames
+colnames(samplePhenotypeData) <- c("phenotypes")
 
-row.names(sampleGroupAssignments) <- sampleGroupAssignments[, 1]
-sampleGroupAssignments <- sampleGroupAssignments[, -1]
-sampleGroupAssignments <- as.data.frame(sampleGroupAssignments)
-
+sampleGroupAssignments <- as.data.frame(sampleGroupAssignments[, -1])
+row.names(sampleGroupAssignments) <- sampleNames
+colnames(sampleGroupAssignments) <- c("groups")
 ```
 
 ### Step 1 : Multiple Component Analysis (MCA) on Unfiltered Dataset

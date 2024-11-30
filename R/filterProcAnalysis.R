@@ -36,6 +36,7 @@
 #' @import vegan
 #'
 filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
+  print("Inside filterProcAnalysis")
   # input checks for error prevention
   if(!is.data.frame(featureMatrix)){
     stop("featureMatrix must be a data frame")
@@ -53,7 +54,7 @@ filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
   procResults <- vegan::procrustes(featureMatrix, phenotypes)
   # calculate Procrustes distances for each feature
   featuresTransformed <- procResults$Yrot
-  print(featuresTransformed)
+  # print(featuresTransformed)
   featureDistances <- apply(featuresTransformed, 2, function(feature){
     residuals <- feature - phenotypes[,1]
     sqrt(sum(residuals^2))
