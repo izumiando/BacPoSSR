@@ -61,8 +61,7 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
   }
 
   # attach groups to samples - make sure samples names correspond in both inputs
-  groupColName <- names(groups)[1]
-  print(groupColName)
+  groupColName <- names(groups)[1] # finding the column name of groups column
   groups$samples <- row.names(groups)
   featureMatrix$samples <- row.names(featureMatrix)
   combinedFeaturesGroups <- merge(groups, featureMatrix,
@@ -78,7 +77,13 @@ plotMultCompAnalysis <- function(featureMatrix, groups=NULL,
   # run Multiple Component Analysis
   combinedFeaturesGroups <- data.frame(lapply(combinedFeaturesGroups,
                                               as.factor))
+
   featuresOnly <- combinedFeaturesGroups[, 2:ncol(combinedFeaturesGroups)]
+
+  if(nrow(featuresOnly)==0 || ncol(featuresOnly) == 0){
+    stop("cannot conduct MCA as there are 0 rows or 0 columns")
+  }
+
   results <- FactoMineR::MCA(featuresOnly,
                  graph = FALSE)
 

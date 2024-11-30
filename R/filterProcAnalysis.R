@@ -39,10 +39,10 @@ filterProcAnalysis <- function(featureMatrix, phenotypes, threshold=0.1){
   # input checks for error prevention
   if(!is.data.frame(featureMatrix)){
     stop("featureMatrix must be a data frame")
-  }else if(!is.data.frame(groups)){
-    stop("groups must be a data frame")
-  }else if(ncol(groups)!=1){
-    stop("groups should have 1 column only")
+  }else if(!is.data.frame(phenotypes)){
+    stop("phenotypes must be a data frame")
+  }else if(ncol(phenotypes)!=1){
+    stop("phenotypes should have 1 column only")
   }else if(!is.double(threshold)){
     stop("threshold must be a number between 0 and 1")
   }else if(threshold < 0 || threshold > 1){

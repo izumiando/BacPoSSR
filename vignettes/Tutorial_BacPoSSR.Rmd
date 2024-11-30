@@ -84,9 +84,12 @@ sampleFeatureMatrix <- sampleFeatureMatrix[, -1]
 
 row.names(samplePhenotypeData) <- samplePhenotypeData[, 1]
 samplePhenotypeData <- samplePhenotypeData[, -1]
+# making sure object stays a data frame
+samplePhenotypeData <- as.data.frame(samplePhenotypeData)
 
 row.names(sampleGroupAssignments) <- sampleGroupAssignments[, 1]
 sampleGroupAssignments <- sampleGroupAssignments[, -1]
+sampleGroupAssignments <- as.data.frame(sampleGroupAssignments)
 
 ```
 

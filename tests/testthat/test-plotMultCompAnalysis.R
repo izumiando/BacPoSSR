@@ -1,12 +1,4 @@
-## Input catching
-### 1) catches when featureMatrix is not a data frame
-### 2) catches when groups is not a data frame
-### 3) catches when groups has more than 1 column
-
-## Output
-### 1) saves image to specified directory
-### 2) returns a list
-### 3) does not save image when saveTo is null
+# testing plotMultCompAnalysis
 
 test_that("input checks are working in plotMultCompAnalysis", {
   # setting up some variables
@@ -59,8 +51,10 @@ test_that("plotMultCompAnalysis functions as designed", {
   testMatrix <- testMatrix[, -1]
 
   testGroups <- read.csv("testGroups.csv", header = TRUE)
-  row.names(testGroups) <- testGroups[, 1]
+  sampleNames <- testGroups[, 1]
   testGroups <- as.data.frame(testGroups[, -1])
+  row.names(testGroups) <- sampleNames
+  colnames(testGroups) <- c("groups")
 
   output <- BacPoSSR::plotMultCompAnalysis(featureMatrix = testMatrix,
                                            groups = testGroups,

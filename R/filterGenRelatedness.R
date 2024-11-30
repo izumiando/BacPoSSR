@@ -54,7 +54,7 @@ filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
     # normalizing by the number of features
     numFeatures <- ncol(cgm)
     grm <- (cgm %*% t(cgm)) / numFeatures
-    # grm <- as.data.frame(grm)
+    grm <- as.data.frame(grm)
   }
 
   # compute the first 10 principal components of the grm
@@ -92,6 +92,7 @@ filterGenRelatedness <- function(featureMatrix, grm=NULL, thresholdP=0.05){
   filteredFeatureMatrix <- subset(filteredFeatureMatrix,
                                   avgPValues <= thresholdP)
   filteredFeatureMatrix <- filteredFeatureMatrix[1:numSamples, ]
+  filteredFeatureMatrix <- as.data.frame(filteredFeatureMatrix)
 
   output <- list(filteredFeatureMatrix, grm)
   return(output)
